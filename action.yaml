@@ -1,6 +1,9 @@
 name: 'Android repo init and sync'
 description: 'Initialize and sync repos using Androids repo command'
 author: Kenneth Mead
+branding:
+  icon: 'aperture'
+  color: 'green'
 inputs:
   manifest_url:
     description: 'Specifies the url or git repo to fetch the manifest from. Used in repo init'
