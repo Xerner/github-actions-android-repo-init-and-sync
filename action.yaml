@@ -12,7 +12,7 @@ inputs:
   manifest_branch:
     description: 'Specifies what manifest branch to use. Used in repo init'
     required: false
-    default: main
+    default: ${{ github.ref_name }}
   manifest_filename:
     description: 'Specifies the name of the manifest file to find. Used in repo init'
     required: false
