@@ -1,0 +1,30 @@
+name: 'Initialize and sync repos using Androids repo command'
+description: 'Greet someone'
+inputs:
+  manifest_url:
+    description: 'Specifies the url or git repo to fetch the manifest from. Used in repo init'
+    required: true
+    default: https://github.com/${{ github.repository_owner }}/manifests
+  manifest_branch:
+    description: 'Specifies what manifest branch to use. Used in repo init'
+    required: false
+    default: main
+  manifest_filename:
+    description: 'Specifies the name of the manifest file to find. Used in repo init'
+    required: false
+    default: default.xml
+runs:
+  using: "composite"
+  steps:
+    - name: Download the android repo tool
+      shell: bash
+      run: |
+        mkdir -p ~/.bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+        chmod a+rx ~/.bin/repo
+    - name: Initialize the repo tool
+      shell: bash
+      run: ~/.bin/repo init -u ${{ inputs.manifest_url }} -b ${{ inputs.manifest_branch }} -m ${{ inputs.manifest_filename }}
+    - name: Sync repos
+      shell: bash
+      run: ~/.bin/repo sync
